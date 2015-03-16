@@ -1,0 +1,62 @@
+SQL TABLES...
+
+-- members
+- member_id
+- username
+- password
+- salt
+- display_name
+- email_address
+
+-- forums
+- forum_id
+- title
+- lft
+- rgt
+
+-- stored_cache
+- cache_id
+- title
+- data
+
+-- installed_themes
+- theme_id
+- title
+- installed_folder
+- imageset_installed_folder
+- author_name
+- author_email
+- author_website
+
+-- installed_languages
+- language_id
+- title
+- installed_folder
+- author_name
+- author_email
+- author_website
+
+-- sessions
+- session_id
+- member_id
+- member_username
+- expires
+- last_click
+- location
+- ip
+- agent
+- hostname
+- anonymous
+- search_bot
+- search_bot_name
+- admin_session
+
+-- session_store
+- session_id
+- expires
+- data
+
+-- system_settings
+- setting_id
+- setting_key
+- setting_value

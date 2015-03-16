@@ -2,9 +2,404 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Oh Snap! Bulletin Community Forums</title>
+<title>Oh Snap! Bulletin Development Forums</title>
+<link href="Uploads/themes/ohsnapbulletin-main/css/index.css" rel="stylesheet" type="text/css" media="screen">
+<script language="javascript" type="text/javascript" src="Uploads/public/jscripts/jquery-1.11.2.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+    $("#popupbg").click(function() {
+        $("#popupbg").fadeOut();
+		$("div:visible[id*='popup']").fadeOut();
+    });
+});
+
+$(document).click(function(e) {
+	if (e.target.id != 'mmlink' && !$('#mmlink').find(e.target).length) {
+        $("#member_menu").fadeOut(500);
+    }
+});
+</script>
+
 </head>
 
 <body>
+<script language="javascript" type="text/javascript">
+function openDialog(el)
+{
+	$("#popupbg").fadeIn();
+	$("#" + el).fadeIn();
+}
+
+function closeDialog(el)
+{
+	$("#popupbg").fadeOut();
+	$("#" + el).fadeOut();
+}
+
+function toggleMemberMenu()
+{	
+	var elHeight = $("#member_menu").height();	
+	elHeight     = (elHeight + 10);
+	$("#member_menu").css({'bottom':-elHeight});
+	$("#member_menu").fadeToggle(500);
+}
+</script>
+<!-- Member Sign In Dialog //-->
+<div class="popUpBackground" id="popupbg"></div>
+<div class="popUpSignIn" id="popupsignin">
+  <div class="popUpTitle">
+   	<div class="popUpTitleLeft">Member Sign In</div>
+        <div class="popUpTitleRight"><a href="javascript:void();" title="Close dialog" onClick="closeDialog('popupsignin');"><img src="Uploads/public/imagesets/master/icons/close-dialog.png" width="16" height="16" alt="*" class="imgFaded"></a></div>
+        <div class="clear"></div>
+  </div>
+  <div class="popUpContent">
+  	<div class="bubbleStatusBar">Don't have an account? <a href="?action=createaccount" title="Create Account">Create Account</a></div>
+    <form name="form1" method="post" action="">
+      <div class="signInFieldBar">
+      	<div class="signInFieldName">Username or Email:</div>
+        <div class="signInFieldValue">
+          <input name="username" type="text" id="username" size="32" maxlength="32">
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="signInFieldBar">
+      	<div class="signInFieldName">Password:</div>
+        <div class="signInFieldValue">
+          <input name="password" type="password" id="password" size="32" maxlength="32">
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="signInOptionsBar">
+      	<div class="signInOptionsField">
+      	  <input name="rememberme" type="checkbox" id="rememberme" value="1" checked>
+      	</div>
+        <div class="signInOptionsValue"><strong>Remember Me?</strong><br>
+          <span class="smlFieldInfo">This option is not recommended for shared computers</span>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="signInOptionsBar">
+      	<div class="signInOptionsField">
+      	  <input name="anonymous" type="checkbox" id="anonymous" value="1">
+      	</div>
+        <div class="signInOptionsValue">Remove Me From Who's Online listings</div>
+        <div class="clear"></div>
+      </div>
+      <div class="signInButtons">
+      	<input type="hidden" name="action" value="authenticate">
+        <input type="hidden" name="sact" value="signin">
+        <input type="hidden" name="referer" value="URLHERE">
+        <input type="submit" name="button" id="button" value="Sign In" title="Sign In">
+        <br>
+        <br>
+      <a href="?action=authenticate&sact=lostpw" title="Click here to retrieve your account information">Forgot your username and/or password?</a>      </div>
+    </form>
+  </div>
+</div>
+<!-- Member Sign In Dialog END //-->
+
+<!-- Account Creation COPPA Verification Dialog //-->
+<div class="popUpAgeVerify" id="popupverify">
+	<div class="popUpTitle">
+    	<div class="popUpTitleLeft">COPPA Age Verification</div>
+        <div class="popUpTitleRight"><a href="javascript:void();" title="Close dialog" onClick="closeDialog('popupverify');"><img src="Uploads/public/imagesets/master/icons/close-dialog.png" width="16" height="16" alt="*" class="imgFaded"></a></div>
+        <div class="clear"></div>
+    </div>
+    <div class="popUpContent">
+    	<div class="popUpAgeVerifyCentered">Please enter your date of birth to continue to account creation<br>
+    	  <br>
+    	  <form name="form2" method="post" action="">
+    	    <select name="month" id="month">
+    	      <option value="1" selected>January</option>
+    	      <option value="2">February</option>
+    	      <option value="3">March</option>
+    	      <option value="4">April</option>
+    	      <option value="5">May</option>
+    	      <option value="6">June</option>
+    	      <option value="7">July</option>
+    	      <option value="8">August</option>
+    	      <option value="9">September</option>
+    	      <option value="10">October</option>
+    	      <option value="11">November</option>
+    	      <option>December</option>
+  	        </select> 
+    	    <select name="day" id="day">
+    	      <option value="1" selected>1</option>
+    	      <option value="2">2</option>
+    	      <option value="3">3</option>
+    	      <option value="4">4</option>
+    	      <option value="5">5</option>
+    	      <option value="6">6</option>
+    	      <option value="7">7</option>
+    	      <option value="8">8</option>
+    	      <option value="9">9</option>
+    	      <option value="10">10</option>
+    	      <option value="11">11</option>
+    	      <option value="12">12</option>
+    	      <option value="13">13</option>
+    	      <option value="14">14</option>
+    	      <option value="15">15</option>
+    	      <option value="16">16</option>
+    	      <option value="17">17</option>
+    	      <option value="18">18</option>
+    	      <option value="19">19</option>
+    	      <option value="20">20</option>
+    	      <option value="21">21</option>
+    	      <option value="22">22</option>
+    	      <option value="23">23</option>
+    	      <option value="24">24</option>
+    	      <option value="25">25</option>
+    	      <option value="26">26</option>
+    	      <option value="27">27</option>
+    	      <option value="28">28</option>
+    	      <option value="29">29</option>
+    	      <option value="30">30</option>
+    	      <option value="31">31</option>
+  	        </select>
+    	  , 
+    	  <select name="year" id="year">
+    	    <option value="2015">2015</option>
+  	      </select>
+    	  <br>
+    	  <br>
+    	  <input type="submit" name="button2" id="button2" value="Continue" title="Continue to account creation">
+    	  </form>
+    	</div>
+  </div>
+</div>
+<!-- Account Creation COPPA Verification Dialog END //-->
+<div class="topBarWrapper">
+	<div class="topBar">
+	  <table class="topBarTable" cellpadding="0" cellspacing="0">
+	    <tr>
+	      <td class="topBarCellLeft"><a href="?action=forums" title="Oh Snap! Bulletin Development Forums"><img src="Uploads/public/imagesets/master/images/bb-logo.png" width="205" height="37" alt="Oh Snap! Bulletin Development Forums" class="imgNoBorder"></a></td>
+	      <td class="topBarCellCenter"><ul>
+	        <li><a href="?action=members&amp;sact=list" title="Members"><img src="Uploads/public/imagesets/master/icons/menu-members.png" width="22" height="22" alt="*" class="imgAlign"> Members</a></li>
+	        <li><a href="?action=calendar" title="Calendar"><img src="Uploads/public/imagesets/master/icons/menu-calendar.png" width="22" height="22" alt="*" class="imgAlign"> Calendar</a></li>
+	        <li><a href="?action=search" title="Search"><img src="Uploads/public/imagesets/master/icons/menu-search.png" width="22" height="22" alt="*" class="imgAlign"> Search</a></li>
+	        <li><a href="?action=help" title="Help"><img src="Uploads/public/imagesets/master/icons/menu-help.png" width="22" height="22" alt="*" class="imgAlign"> Help</a></li>
+          </ul></td>
+	      <td class="topBarCellRight"><table class="memberStatusTable" cellspacing="0" cellpadding="0" align="right">
+	            <tr>
+	              <td class="memberStatusLeft"><img src="../../sam.jpg" width="31" height="35" alt="*" class="avatarBorder"></td>
+	              <td class="memberStatusRight">Signed in as: <strong><a href="?action=members&id=1" title="View Sam Wilcox's profile">Sam Wilcox</a></strong><br>
+                  <span class="memberMenuLink" id="mlink"><a href="javascript:void();" title="Click here to open your member menu" onClick="toggleMemberMenu();" id="mmlink"><strong>Member Menu</strong> <span id="mmenuimg"><img src="Uploads/public/imagesets/master/icons/expand-menu.png" width="9" height="16" alt="*" class="imgAlign"></span></a>
+                  <div class="memberMenu" id="member_menu"><span class="dropDownMenuRel"><img src="Uploads/public/imagesets/master/icons/drop-down-arrow.png" class="dropDownMenuArrow"></span><span class="dropDownFirstLink"><a href="?action=members&id=1" title="View your profile">View My Profile</a></span><span class="dropDownLink"><a href="?action=messenger" title="My Messages (6 new)">My Messages (6 new)</a><a href="?action=settings" title="My Settings">My Settings</a><a href="?action=authenticate&sact=signout" title="Sign Out">Sign Out</a></span></div></span></td>
+	              </tr>
+              </table></td>
+        </tr>
+      </table>
+	</div>
+</div>
+<div class="wrapper">
+  <div class="contentWrapper">
+   	  <div class="contentBody">
+        	<div class="navBar">
+            	<div class="navBarLeft"><img src="Uploads/public/imagesets/master/icons/nav-house.png" width="16" height="16" alt="*" class="imgMiddle"> <a href="?action=forums" title="Oh Snap! Bulletin Development Forums">Oh Snap! Bulletin Development Forums</a></div>
+                <div class="navBarRight"><a href="?action=social&sact=rss" title="RSS Feed"><img src="Uploads/public/imagesets/master/icons/rss.png" width="16" height="16" alt="RSS Feed" class="imgNoBorder"></a></div>
+                <div class="clear"></div>
+          </div>
+        <script language="javascript" type="text/javascript">
+		  function toggle_island()
+		  {
+			  if ($("#l_island").hasClass('islandTableLeftFull'))
+			  {
+				  	$("#r_island").fadeIn('slow');
+					$("#l_island").removeClass('islandTableLeftFull');
+					$("#l_island").addClass('islandTableLeft');
+					$("#l_island").fadeIn('slow').delay(300);
+					$("#island_toggle_img").html('<a href="javascript:void();" title="Collapse Right Island" onClick="toggle_island();"><img src="Uploads/public/imagesets/master/icons/close-island.png" alt="Collapse Right Island"></a>');
+			  }
+			  else
+			  {
+				  	$("#r_island").fadeOut('slow');
+					$("#l_island").removeClass('islandTableLeft');
+					$("#l_island").addClass('islandTableLeftFull');
+					$("#l_island").fadeIn('slow');
+					$("#island_toggle_img").html('<a href="javascript:void();" title="Expand Right Island" onClick="toggle_island();"><img src="Uploads/public/imagesets/master/icons/open-island.png" alt="Expand Right Island"></a>');
+			  }
+		  }
+		  
+		  function toggle_me(eb,ei,et)
+		  {
+			  if ($("#" + eb).hasClass('hidden'))
+			  {
+				  $("#" + et).css('margin-bottom','0px');
+				  $("#" + eb).fadeIn();
+				  $("#" + eb).removeClass('hidden');
+				  $("#" + ei).html('<a href="javascript:void();" title="Collapse" onClick="toggle_me(\'' + eb + '\',\'' + ei + '\',\'' + et + '\');"><img src="Uploads/public/imagesets/master/icons/collapse.png" alt="Collapse" class="imgNoBorder"></a>');
+			  }
+			  else
+			  {
+				  $("#" + eb).fadeOut();
+				  $("#" + eb).addClass('hidden');
+				  $("#" + ei).html('<a href="javascript:void();" title="Expand" onClick="toggle_me(\'' + eb + '\',\'' + ei + '\',\'' + et + '\');"><img src="Uploads/public/imagesets/master/icons/expand.png" alt="Expand" class="imgNoBorder"></a>');
+				  $("#" + et).css('margin-bottom','12px');
+			  }
+		  }
+		  </script>
+          <div class="islandContainer">
+        <table class="islandTable" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="islandTableLeft" valign="top" id="l_island">
+          <div class="islandLeft" id="left_island"><span class="islandToggle" id="island_toggle_img"><a href="javascript:void();" title="Collapse Right Island" onClick="toggle_island();"><img src="Uploads/public/imagesets/master/icons/close-island.png" width="48" height="48" alt="Collapse Right Island"></a></span>
+          	<div class="mainContentTitle" id="cat_1_title">
+            	<div class="mainContentTitleLeft">Category Name Here</div>
+                <div class="mainContentTitleRight" id="cat_1_img"><a href="javascript:void();" title="Collapse" onClick="toggle_me('cat_1_body','cat_1_img','cat_1_title');"><img src="Uploads/public/imagesets/master/icons/collapse.png" width="16" height="16" alt="Collapse" class="imgNoBorder"></a></div>
+                <div class="clear"></div>
+            </div> 
+            <div id="cat_1_body">
+            <div class="mainContent">
+           	  <div class="forumBubble">
+           	    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+           	      <tr>
+           	        <td class="forumBubbleIcon"><img src="Uploads/public/imagesets/master/icons/status/forums/new-posts.png" width="32" height="32" alt="New Posts"></td>
+           	        <td class="forumBubbleInfo"><span class="forumBubbleName"><img src="Uploads/public/imagesets/master/icons/menu-members.png" width="22" height="22" alt="*" class="imgAlign"> <a href="?action=forum&id=1" title="Forum Name Here">Forum Name Here</a></span><br>
+       	            The forum description will go right here<br>
+       	            <span class="forumBubbleSubForums"><strong>Sub Forums:</strong> <a href="?action=forum&id=2" title="Forum One">Forum One</a></span></td>
+           	        <td class="forumBubbleTopics">5,654<br>
+       	            <span class="forumBubbleStatsSmlTxt">Topics</span></td>
+           	        <td class="forumBubbleReplies">54,654<br>
+           	          <span class="forumBubbleStatsSmlTxt">Replies</span></td>
+           	        <td class="forumBubbleLastPost"><a href="?action=members&amp;id=1" title="View Sam Wilcox's profile"><img src="Uploads/public/imagesets/master/images/temp-sam.png" width="37" height="35" alt="*" class="avatarBorderFloat"></a><a href="?action=topic&id=1" title="Topic Name Here">Topic Name Here</a> <a href="?action=topic&id=1&page=2#post_4543" title="Go to the last post"><img src="Uploads/public/imagesets/master/icons/go-last-post.png" width="8" height="8" alt="*" class="imgTop"></a><br>
+           	          <strong>By:</strong> <a href="?action=members&id=1" title="View Sam Wilcox's profile">Sam Wilcox</a><br>
+           	          Date and Time</td>
+       	          </tr>
+       	        </table>
+           	  </div>
+              <div class="forumBubbleSep"></div>
+              <div class="forumBubble">
+           	    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+           	      <tr>
+           	        <td class="forumBubbleIcon"><img src="Uploads/public/imagesets/master/icons/status/forums/redirect.png" width="32" height="32" alt="New Posts"></td>
+           	        <td class="forumBubbleInfo"><span class="forumBubbleName"><a href="?action=forum&id=1" title="Forum Name Here">Forum Name Here</a></span><br>
+       	            The forum description will go right here</td>
+           	        <td class="forumBubbleTopics">&nbsp;</td>
+           	        <td class="forumBubbleReplies">54,654<br>
+       	            <span class="forumBubbleStatsSmlTxt">Clicks</span></td>
+           	        <td class="forumBubbleLastPost"><em>This forum will redirect you to a different URL...</em></td>
+       	          </tr>
+       	        </table>
+           	  </div>
+            </div>
+            </div>
+            <div class="mainContentNoTitle">
+            	<div class="mainContentBubble">
+                	<div class="whosOnlineTitle"><span class="whosOnlineLink"><a href="?action=online" title="View who is currently online right now">Who's Online?</a></span> (<strong>565</strong> total, <strong>45</strong> member(s), <strong>32</strong> hidden user(s), <strong>21</strong> guest(s), and <strong>12</strong> search bot(s))</div>
+                    <div class="whosOnlineContent"><a href="?action=members&id=1" title="Last click: Time Here">Sam Wilcox</a></div>
+                </div>
+            </div>
+            </div>
+            </td>
+            <td class="islandTableRight" valign="top" id="r_island">
+            <div class="islandRight" id="right_island">
+            	<div class="rightIslandInsider">
+                	<div class="rightIslandTitle">Welcome!</div>
+                    <div class="rightIslandContent">We would like to welcome you to our humble community here on the inter webs!</div>
+                	<div class="rightIslandTitle">Latest Topics</div>
+                    <div class="rightIslandContent">
+                    	<div class="rightIslandContentDiv">
+                        	<div class="rightIslandLatestTopicsLeft"><img src="../../sam.jpg" width="35" height="40" alt="*" class="avatarBorder"></div>
+                            <div class="rightIslandLatestTopicsRight"><a href="?action=topic&id=1" title="Topic Name Goes Here">Topic Name Goes Here</a><br>
+                              <strong>By:</strong> Sam Wilcox<br>
+                              <span class="rightIslandDateTime">Date and Time here</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="rightIslandContentDivider"></div>
+                        <div class="rightIslandContentDiv">
+                        	<div class="rightIslandLatestTopicsLeft"><img src="../../sam.jpg" width="35" height="40" alt="*" class="avatarBorder"></div>
+                            <div class="rightIslandLatestTopicsRight"><a href="?action=topic&id=1" title="Topic Name Goes Here">Topic Name Goes Here</a><br>
+                              <strong>By:</strong> Sam Wilcox<br>
+                              <span class="rightIslandDateTime">Date and Time here</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="rightIslandTitle">Community Statistics</div>
+                    <div class="rightIslandContent">
+                    	<div class="rightIslandContentDiv">
+                        	<div class="rightIslandStatsLeft">Most Online</div>
+                            <div class="rightIslandStatsRight">654<br>
+                              <span class="rightIslandDateTime">Date and Time</span></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="rightIslandContentDivider"></div>
+                        <div class="rightIslandContentDiv">
+                        	<div class="rightIslandStatsLeft">Total Members</div>
+                            <div class="rightIslandStatsRight">546,876</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="rightIslandContentDivider"></div>
+                        <div class="rightIslandContentDiv">
+                        	<div class="rightIslandStatsLeft">Newest Member</div>
+                            <div class="rightIslandStatsRight"><a href="?action=members&id=1" title="View Sam Wilcox's profile">Sam Wilcox</a><br>
+                            <span class="rightIslandDateTime">Date and Time</span></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="rightIslandContentDivider"></div>
+                        <div class="rightIslandContentDiv">
+                        	<div class="rightIslandStatsLeft">Total Sign Ins</div>
+                            <div class="rightIslandStatsRight">56,765,876</div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="rightIslandTitle">Bulletin Board Statistics</div>
+                    <div class="rightIslandContent">
+                    	<div class="rightIslandContentDiv">
+                        	<div class="rightIslandStatsLeft">Total Topics</div>
+                            <div class="rightIslandStatsRight">54,876</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="rightIslandContentDivider"></div>
+                        <div class="rightIslandContentDiv">
+                        	<div class="rightIslandStatsLeft">Total Posts</div>
+                            <div class="rightIslandStatsRight">1,543,543</div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            </td>
+          </tr>
+        </table>
+        </div>
+  	  </div>
+    <div class="bottomBar">
+        	<div class="bottomBarLeft">
+        	  <select name="theme" id="theme">
+              	<optgroup label="Choose Your Theme">
+        	    <option value="1">Oh Snap! Bulletin Main</option>
+                </optgroup>
+      	      </select> 
+        	  <select name="language" id="language">
+              	<optgroup label="Choose Your Language">
+        	    <option value="1">English (US-American)</option>
+                </optgroup>
+      	      </select>
+        	</div>
+            <div class="bottomBarRight">
+              <ul>
+                <li><a href="?action=search&sact=newest" title="View Newest Content">View Newest Content</a></li>
+                <li><a href="?action=forums&sact=markall" title="Mark All Read">Mark All Read</a></li>
+                <li><a href="?action=members&sact=leaders" title="View Leaders">View Leaders</a></li>
+                <li><a href="#top" title="Go To Top">Go To Top</a></li>
+              </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="underBottom">Page processed in <strong>0.43</strong> seconds with a total of <strong>6</strong> SQL queries, with GZIP compression <strong>enabled</strong> <br>
+        All times are America/Boise. This page was processed on TimeHere
+        <br>
+        Powered by <a href="http://www.ohsnapbulletin.com" title="Oh Snap! Bulletin" target="_blank">Oh Snap! Bulletin</a> Version 1.0.0</div>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 </body>
 </html>

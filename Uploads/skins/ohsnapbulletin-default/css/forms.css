@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+form
+{
+	padding:0px;
+	margin:0px;
+}
+
+input
+{
+	font-family:Verdana, Geneva, sans-serif;
+	color:#000;
+	background-color:#FFF;
+}
+
+input[type="text"]
+{
+	padding:6px;
+	border:1px solid #999;
+}
+
+input[type="text"]:hover
+{
+	border:1px solid #333;
+}
+
+input[type="text"]:focus
+{
+	border:1px solid #333;
+}
+
+input[type="password"]
+{
+	padding:6px;
+	border:1px solid #999;
+}
+
+input[type="password"]:hover
+{
+	border:1px solid #333;
+}
+
+input[type="password"]:focus
+{
+	border:1px solid #333;
+}
+
+.longTextField
+{
+	width:100%;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+input[type="checkbox"]
+{
+	padding:0px;
+	margin:0px;
+	margin-right:2px;
+	border:1px solid #999;
+	vertical-align:text-bottom;
+}
+
+input[type="checkbox"]:hover
+{
+	border:1px solid #333;
+}
+
+label
+{
+	display:inline-block;
+	margin-bottom:8px;
+}
+
+input[type="submit"]
+{
+	background-color:#1F384F;
+	color:#FFF;
+	font-weight:bold;
+	padding-top:8px;
+	padding-bottom:8px;
+	padding-left:24px;
+	padding-right:24px;
+	border:1px solid #000;
+	cursor:pointer;
+}
+
+input[type="submit"]:hover
+{
+	background-color:#2B4E6F;
+}

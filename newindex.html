@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Oh Snap! Bulletin</title>
+<link href="Uploads/skins/ohsnapbulletin-default/css/index.css" rel="stylesheet" type="text/css" media="screen">
+<script type="application/javascript" src="Uploads/public/jscripts/jquery-1.11.2.min.js"></script>
+<script type="application/javascript" src="Uploads/public/jscripts/jquery-ui.min.js"></script>
+
+<script type="application/javascript">
+$(document).ready(function(e) {
+    $("#id-dialog-bg").click(function(e) {
+        $("#id-dialog-bg").fadeOut(700);
+		$("div:visible[id*='dialog']").fadeOut(700);
+    });
+});
+
+$(document).click(function(e) {
+    if (e.target.id != $("div:visible[id*='slnk']").attr('id') && !$("div:visible[id*='slnk']").find(e.target).length) {
+		$("div:visible[id*='popout']").fadeOut(300);
+	}
+});
+
+function toggle( icn, bdy )
+{
+	if ( $("#" + bdy).hasClass("toggleOn") )
+	{
+		$("#" + bdy).removeClass("toggleOn");
+		$("#" + bdy).addClass("toggleOff");
+		$("#" + bdy).fadeIn(700);
+		$("#" + icn).html('<a href="javascript:void(0);" title="Collapse" onclick="toggle(\'' + icn + '\',\'' + bdy + '\');"><img src="Uploads/public/imagesets/master/icons/collapse.png" alt="*" /></a>');
+	}
+	else
+	{
+		$("#" + bdy).removeClass("toggleOff");
+		$("#" + bdy).addClass("toggleOn");
+		$("#" + bdy).fadeOut(700);
+		$("#" + icn).html('<a href="javascript:void(0);" title="Expand" onclick="toggle(\'' + icn + '\',\'' + bdy + '\');"><img src="Uploads/public/imagesets/master/icons/expand.png" alt="*" /></a>');
+	}
+}
+
+function scrollToTop()
+{
+	event.preventDefault();
+	
+	$("html, body").animate({
+		scrollTop:0
+	}, "slow");
+}
+
+function togglePopOut(pu,lk)
+{	
+	$("div:visible[id*='popout']").fadeOut(300);
+	$("#" + pu).fadeToggle(300).position({
+		my:       "left top",
+		at:       "left bottom",
+		of:       $("#" + lk),
+		collison: "fit"
+	});
+}
+
+function togglePopOutUnder(pu,lk)
+{	
+	$("#" + pu).fadeToggle(300).position({
+		my:       "right bottom",
+		at:       "right top",
+		of:       $("#" + lk),
+		collison: "fit"
+	});
+}
+
+function openDialog(el)
+{
+	$("#id-dialog-bg").fadeIn(700);
+	$("#" + el).fadeIn(700);
+	
+	var elHeight = $("#" + el).height();
+	var elHeight = (elHeight / 2);
+	$("#" + el).css({"margin-top":-elHeight});
+	
+	return false;
+}
+</script>
+
+</head>
+
+<body>
+<!-- START PopOut Menus //-->
+<div class="skinLangPopOut" id="id-skin-popout">
+	<div class="popOutContainer"><span class="popOutFirstItem"><a href="?action=toggle&amp;do=skin&amp;id=1" title="Oh Snap! Bulletin Default as your skin">Oh Snap! Bulletin Default</a></span></div>
+</div>
+
+<div class="skinLangPopOut" id="id-lang-popout">
+	<div class="popOutContainer"><span class="popOutFirstItem"><a href="?action=toggle&amp;do=language&amp;id=1" title=""><img src="Uploads/public/imagesets/master/icons/flags/us.png" width="16" height="11" alt="*" class="imgAlignMiddle">&nbsp;&nbsp;English (US-American)</a></span></div>
+</div>
+
+<div class="notificationsPopOut" id="id-notifications-popout">
+       	  <div class="contentTitlePopOut">Notifications</div>
+            <span class="underPopOutItems"><a href="?action=notifications" title="You have no new notifications">You have no new notifications</a></span>
+            <div class="contentBodyPopOut"><div class="centered"><span class="popOutButton"><a href="?action=notifications" title="See All Notifications">See All Notifications</a></span></div></div>
+</div>
+
+<div class="memberMenuPopOut" id="id-member-menu-popout">
+	<div class="contentTitlePopOut">Member Menu</div>
+    <span class="popOutItems">
+    <a href="?action=members&do=Sam_Wilcox_1" title="View your profile">View My Profile</a>
+    <a href="?action=settings" title="Account Settings">Account Settings</a>
+    <a href="?action=messenger" title="You have 3 new private messages">Private Messages (3 New)</a>
+    <a href="?action=following" title="View what you are following and see who is following you">Following</a>
+    <a href="?action=authenticate&amp;do=signout" title="Sign out">Sign Out</a>
+    </span>
+</div>
+<!-- END PopOut Menus //-->
+
+<!-- START PopUp Dialogs //-->
+<div class="popUpBackground" id="id-dialog-bg"></div>
+<div class="signInPopUp" id="id-signin-dialog">
+	<div class="popUpContainer">
+    	<div class="contentTitlePopUp">Member Sign In</div>
+      <div class="signInPopUpBody">
+        	<div class="signInPopUpLeft">
+        	  <form name="form1" method="post" action="index.php">
+        	    <input name="username" type="text" class="longTextField" id="username" placeholder="Username or Email Address" maxlength="32">
+        	    <br>
+        	    <br>
+        	    <input name="password" type="password" class="longTextField" id="password" placeholder="Password" maxlength="32">
+        	    <br>
+<br>
+<input name="rememberme" type="checkbox" id="rememberme" value="1" checked><label for="rememberme">Remember me?</label>
+<br>
+<input name="anonymous" type="checkbox" id="anonymous" value="1"><label for="anonymous">Sign in as anonymous?</label>
+<br>
+        	    <br>
+        	    <input type="submit" name="button" id="button" value="Sign in" title="Sign in">
+        	  </form>
+        	</div>
+            <div class="signInPopUpRight">Sign in with your account from...<br>
+              <br>
+          <img src="Uploads/public/imagesets/master/images/smedia/login-with-fb.png" width="154" height="22" alt="*">            <br>
+          <br>
+          Don't have an account?
+          <a href="?action=createaccount" title="Sign Up">Sign Up</a><br>
+          <br>
+          <a href="?action=authenticate&amp;do=lostpw" title="Forgot your password?">Forgot your password?</a>            </div>
+        </div>
+    </div>
+</div>
+<!-- END PopUp Dialogs //-->
+<div class="pageWrapper">
+<div class="topBarWrapper">
+	<div class="topBar">
+    	<div class="topBarLeft"><a href="?action=forums" title="Oh Snap! Bulletin"><img src="Uploads/public/imagesets/master/images/bb-logo.png" width="273" height="39" alt="Oh Snap! Bulletin" class="imgAlignMiddleBoth"></a></div>
+        <div class="topBarRight">
+        	<div class="memberStatusBar">
+            	<div class="memberStatusBarIcon"><div id="id-notifications-slnk" class="popOutRel"><a href="javascript:void(0);" title="Notifications" onClick="togglePopOut('id-notifications-popout','id-notifications-slnk');"><img src="Uploads/public/imagesets/master/icons/notifications.png" width="16" height="16" alt="*" class="notificationIcon"></a></div></div>
+                <div class="memberStatusBarLink">
+                	<div class="memberStatusBarLinkLeft"><img src="Uploads/public/imagesets/master/images/tmp-sam-smlr.png" width="33" height="32" alt="*" class="memberAvatarThumb imgAlignMiddleWithBorders"></div>
+                    <div class="memberStatusBarLinkRight" id="id-member-menu-slnk"><a href="javascript:void();" title="Open menu" onClick="togglePopOut('id-member-menu-popout','id-member-menu-slnk');">Sam Wilcox <img src="Uploads/public/imagesets/master/icons/down-arrow.png" width="16" height="16" alt="*" class="imgAlign"></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="menuBarWrapper">
+	<div class="menuBar">
+    	<div class="menuBarLeft">
+        	<ul>
+                <li><a href="?action=forums" title="Forums">Forums</a></li>
+                <li><a href="?action=members&amp;do=list" title="Members">Members</a></li>
+                <li><a href="?action=calendar" title="Calendar">Calendar</a></li>
+                <li><a href="?action=gallery" title="Gallery">Gallery</a></li>
+                <li><a href="?action=search" title="Search">Search</a></li>
+                <li><a href="?action=help" title="Help">Help</a></li>
+            </ul>
+        </div>
+        <div class="menuBarRight"><img src="Uploads/public/imagesets/master/icons/nav-folder.png" width="16" height="16" alt="*" class="imgAlign"> <a href="?action=forums" title="Oh Snap! Bulletin">Oh Snap! Bulletin</a> / <strong>Members</strong></div>
+    </div>
+</div>
+<div class="pageTitleBarWrapper">
+	<div class="pageTitleBar"><img src="Uploads/public/imagesets/master/icons/pagetitles/forums.png" width="32" height="32" alt="*" class="pageTitleIcon"> Forums</div>
+</div>
+<div class="wrapper">
+	<div class="container">
+   	  <div class="contentTitle">
+        	<div class="contentTitleLeft">Category Name Goes Here</div>
+            <div class="contentTitleRight" id="id-cat-1-i"><a href="javascript:void(0);" title="Collapse" onClick="toggle('id-cat-1-i','id-cat-1-b');"><img src="Uploads/public/imagesets/master/icons/collapse.png" width="16" height="16" alt="*" class="imgNoBorder"></a></div>
+      </div>
+      <div id="id-cat-1-b" class="toggleOff">
+      <div class="contentSubTitle">
+      	<div class="forumTitleInfo">Forum Information</div>
+        <div class="forumTitleTopics">Topics</div>
+        <div class="forumTitleReplies">Replies</div>
+        <div class="forumTitleLastPost">Last Post Information</div>
+      </div>
+      <div class="forumTableContainer">
+      	<div class="forumIcon"><img src="Uploads/public/imagesets/master/icons/status-icons/forum/new-posts.png" width="32" height="32" alt="*" title="Forum contains new posts"></div>
+        <div class="forumInfo"><span class="forumNameLink"><a href="?action=forum&amp;do=Forum_Name_Here_1" title="Forum Name Here">Forum Name Here</a></span><br>
+          <span class="forumDesc">The forum description will be placed right here.</span><br>
+        <span class="subForumLinkText"><strong>Sub Forums:</strong> <a href="?action=forums&amp;do=Sub_Forum_Name_1" title="Sub Forum Name">Sub Forum Name</a></span></div>
+        <div class="forumTopics">10,543</div>
+        <div class="forumReplies">5,453</div>
+        <div class="forumLastPost">
+        	<div class="forumLastPostAvatar"><img src="Uploads/public/imagesets/master/images/tmp-sam-smlr.png" width="33" height="32" alt="*" class="memberAvatarThumb imgAlignMiddleWithBorders"></div>
+            <div class="forumLastPostInfo"><a href="?action=topic&amp;do=Topic_Name_Here_1" title="Topic Name Here">Topic Name Here</a> <a href="?action=post&amp;do=Post_Name_Here_1&amp;page=2#post12" title="Go to the last post"><img src="Uploads/public/imagesets/master/icons/go-to-post.png" width="16" height="16" alt="*" class="imgAlign"></a><br>
+              <strong>By:</strong> <a href="?action=members&amp;do=Sam_Wilcox_1" title="View this member's profile">Sam Wilcox</a> <br>
+            <span class="timestampTxt">Date and Time here</span>
+            </div>
+        </div>
+      </div>
+      <div class="forumTableContainer">
+      	<div class="forumIcon"><img src="Uploads/public/imagesets/master/icons/status-icons/forum/redirect.png" width="32" height="32" alt="*" title="Forum will redirect you"></div>
+        <div class="forumInfo"><span class="forumNameLink"><a href="?action=forum&amp;do=Forum_Name_Here_1" title="Forum Name Here">Forum Name Here</a></span><br>
+          <span class="forumDesc">The forum description will be placed right here.</span></div>
+        <div class="forumTopics">---</div>
+        <div class="forumReplies">---</div>
+        <div class="forumLastPost"><strong>Total Redirects:</strong> 10,543</div>
+      </div>
+      </div>
+      <div class="bigSeperator"></div>
+      <div class="contentTitle">
+      	<div class="contentTitleLeft">Bulletin Board Information Center</div>
+        <div class="contentTitleRight" id="id-bbic-i"><a href="javascript:void(0);" title="Collapse" onClick="toggle('id-bbic-i','id-bbic-b');"><img src="Uploads/public/imagesets/master/icons/collapse.png" width="16" height="16" alt="*" class="imgNoBorder"></a></div>
+      </div>
+      <div id="id-bbic-b" class="toggleOff">
+      <div class="contentSubTitle">
+      	<div class="bbicSubLeft"><a href="?action=online" title="View a more details listing">Who's Online?</a></div>
+        <div class="bbicSubMiddle">Bulletin Board Statistics</div>
+        <div class="bbicSubRight"><a href="?action=calendar&amp;year=2015&amp;month=3&amp;day=10" title="View birthdays on our calendar">Who's Celebrating A Birthday Today?</a></div>
+      </div>
+      <div class="bbicContainer">
+      	<div class="bbicLeft">
+        	<div class="bbicInsideLeft"><img src="Uploads/public/imagesets/master/icons/bbic-online.png" width="32" height="32" alt="*"></div>
+          <div class="bbicInsideRight">
+            	<div class="halfLeft">Users online right now: <strong>34</strong></div>
+                <div class="halfRight">Accurate within <strong>15</strong> minutes</div>
+            <div class="clear"></div>
+            Members: <strong>32</strong> | Anonymous Users: <strong>12</strong> | Guests: <strong>3</strong> | Search Bots: <strong>12</strong><br>
+            <br>
+          <a href="?action=members&amp;do=Sam_Wilcox_1" title="Last click: Time here">Sam Wilcox</a>          </div>
+        </div>
+        <div class="bbicMiddle">
+        	<div class="bbicInsideLeft"><img src="Uploads/public/imagesets/master/icons/bbic-stats.png" width="32" height="32" alt="*"></div>
+            <div class="bbicInsideRight">Please welcome our newest member: <a href="?action=members&amp;do=Sam_Wilcox_1" title="View this member's profile">Sam Wilcox</a> on <span class="timestampTxt"><strong>Date and Time</strong></span><br>
+            Our community has a total of <strong>5,432</strong> registered members!<br>
+            Our community has posted a total of <strong>32,432</strong> posts!
+            That's <strong>12,432</strong> replies to <strong>21,343</strong> topics!<br>
+            The most users ever online at once was <strong>4,322</strong> on <span class="timestampTxt"><strong>Date and Time</strong></span><strong>!</strong><br>
+            There have been a total of <strong>12</strong> users that have visited just today! </div>
+        </div>
+        <div class="bbicRight">
+        	<div class="bbicInsideLeft"><img src="Uploads/public/imagesets/master/icons/bbic-birthdays.png" width="32" height="32" alt="*"></div>
+            <div class="bbicInsideRight">Members celebrating a birthday today: <strong>21</strong><br>
+              <br>
+            <a href="?action=members&amp;do=Sam_Wilcox_1" title="View this member's profile">Sam Wilcox</a> <span class="questionMark" title="32 years old">(<strong>32</strong>)</span></div>
+        </div>
+      </div>
+      </div>
+</div>
+</div>
+<div class="pushFooter"></div>
+</div>
+<div class="pageFooter">
+	<div class="footerContainer">
+    	<div class="topFooterWrapper">
+    	<div class="topFooter">
+        	<div class="footerLeft"><div id="id-skin-slnk" class="skinLangWrapper"><a href="javascript:void(0);" title="Choose a skin" class="popOutLink" onClick="togglePopOut('id-skin-popout','id-skin-slnk');">Choose Skin</a> <img src="Uploads/public/imagesets/master/icons/up-dialog.png" width="16" height="16" alt="*" class="imgAlign"></div>
+        	    <div class="skinLangWrapper" id="id-lang-slnk"><a href="javascript:void(0);" title="Choose a language" onClick="togglePopOut('id-lang-popout','id-lang-slnk');">Choose Language</a> <img src="Uploads/public/imagesets/master/icons/up-dialog.png" width="16" height="16" alt="*" class="imgAlign"></div>
+        	</div>
+          <div class="footerRight">
+            <ul>
+              <li><a href="?action=forums&amp;do=markall" title="Mark the entire bulletin board as read">Mark All Read</a></li>
+              <li><a href="?action=search&amp;do=newcontent" title="View the newest content">New Content</a></li>
+              <li><a href="?action=groups&amp;do=leaders" title="View the leaders of this community">Leaders</a></li>
+              <li><a href="?action=forums&amp;do=rules" title="View our community rules">Community Rules</a></li>
+              <li><a href="?action=forums&amp;do=privacy" title="View our privacy policy">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+    	</div>
+    	<div class="bottomFooterWrapper">
+    	<div class="bottomFooter">
+        	<div class="bottomFooterLeft">
+        	  <ul>
+        	    <li>Page processed in: <strong>0.01</strong> seconds</li>
+        	    <li>SQL Queries: <strong>4</strong></li>
+        	    <li>GZIP Compression: <strong>enabled</strong></li>
+      	      </ul>
+        	</div>
+            <div class="bottomFooterMiddle">All times are <strong>America/Boise</strong> | <a href="javascript:void(0);" title="Scroll to the top of the page" onClick="scrollToTop();">Go To Top</a></div>
+            <div class="bottomFooterRight">Powered by <a href="http://www.ohsnapbulletin.com" title="Oh Snap! Bulletin">Oh Snap! Bulletin</a> Version 1.0.0 &copy; 2015</div>
+        </div>
+    	</div>
+    </div>
+</div>
+</body>
+</html>
